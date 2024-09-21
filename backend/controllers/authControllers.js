@@ -22,12 +22,19 @@ const signUp = async (req, res) => {
 
     if (user) {
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: 3600});
-        
+
+        res.cookie('token', token, {
+            httpOnly: true, // Prevents JavaScript from accessing the token
+            secure: process.env.NODE_ENV === 'production', // Set to true in production
+            maxAge: 3600000  // Token valid for 1 hour
+        });
+
         res.json({ 
             message: 'User registered successfully', 
+            // id: user._id,  
             name: name,
-            email: email,
-            genretedToken: token 
+            // email: email,
+            // genretedToken: token 
         });
     } else {
         res.status(500).json({ message: 'Server error' });
@@ -54,11 +61,18 @@ const logIn = async (req, res) => {
 
     const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, {expiresIn: 3600});
 
+    res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 3600
+    })
+
     res.json({
         message: `Login successful for ${user.name}`,
+        // id: user._id,
         name: user.name,
-        email: user.email,
-        genretedToken: token
+        // email: user.email,
+        // genretedToken: token
     });
 }
 

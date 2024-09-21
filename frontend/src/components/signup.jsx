@@ -33,7 +33,6 @@ export default function SignUp () {
         setConfirmPassword(e.target.value);
     }
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -50,6 +49,7 @@ export default function SignUp () {
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({
                     name,
                     email,
@@ -58,7 +58,6 @@ export default function SignUp () {
 
                 
             })
-            // <Alert severity="success">Registration Succesfull</Alert>
 
             if (response.ok) {
                 setAlertMessage('Registration Successful');
@@ -71,7 +70,6 @@ export default function SignUp () {
 
         } catch (error) {
             console.error(`Error ${error}`);
-            // <Alert severity="error">Error occured</Alert>
 
             setAlertMessage('An error occurred');
             setAlertSeverity('error');
@@ -111,7 +109,6 @@ export default function SignUp () {
                 <br />
                 <TextField id="pic" variant="outlined" type='file' />
             </Box> */}
-
 
             <Button variant="contained" type='submit' fullWidth>Sign Up</Button>
         </Box>

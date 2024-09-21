@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import TextField from '@mui/material/TextField';
 import FormLabel from '@mui/material/FormLabel';
@@ -10,6 +9,7 @@ import AlertTitle from '@mui/material/AlertTitle';
 import Typography from '@mui/material/Typography';
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 
 export default function LogIn() {
 
@@ -20,6 +20,7 @@ export default function LogIn() {
     const [alertSeverity, setAlertSeverity] = useState('');
 
     const [data, setData] = useState(null);
+    const navigate = useNavigate();
 
     const handleEmail = (e) => {
         setEmail(e.target.value);
@@ -41,6 +42,7 @@ export default function LogIn() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({ email, password })
             })
 
@@ -53,9 +55,9 @@ export default function LogIn() {
                 setData(data);
                 console.log(data);
 
-            } else {
-                // alert(data.message);
+                navigate('/api/protected');
 
+            } else {
                 setAlertSeverity('error');
                 setAlertMessage(`Error: ${error.message}`);
             }
@@ -80,9 +82,6 @@ export default function LogIn() {
                             <Typography gutterBottom sx={{ color: 'text.secondary', fontSize: 14 }}>
                                 Role: User
                             </Typography>
-                            {/* <Typography sx={{ color: 'text.secondary', mb: 1.5 }}>
-                                hello world
-                            </Typography> */}
                             <Typography variant="body2">
                                 Id: {data.id}
                             </Typography>
