@@ -36,28 +36,23 @@ function a11yProps(index) {
     };
 }
 
-function BasicTabs() {
-    const [value, setValue] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-}
 export default function HomePage() {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
     return (
-        <Box>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', bgcolor: 'background.default', border: '1px solid'}}>
+            <Box sx={{ width: '100%', maxWidth: 400, border: '1px solid' }}>
+                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
                     <Tab label="Log In" {...a11yProps(0)} />
                     <Tab label="Sign Up" {...a11yProps(1)} />
                 </Tabs>
             </Box>
-            <CustomTabPanel value={value} index={0}>
+            <CustomTabPanel value={value} index={0} >
                 <LogIn />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>

@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 import { useState } from 'react';
 
@@ -32,8 +33,6 @@ export default function SignUp () {
         setConfirmPassword(e.target.value);
     }
 
-    
-    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -79,26 +78,33 @@ export default function SignUp () {
         }
     }
     return(
-        <Box component="form" onSubmit={handleSubmit}>
-            <Box>
+        <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, mx: 'auto', p: 3, borderRadius: 2, boxShadow: 3 }}>
+            {alertMessage && (
+                <Alert severity={alertSeverity}>
+                    {alertSeverity === 'error' && <AlertTitle>Error</AlertTitle>}
+                    {alertSeverity === 'success' && <AlertTitle>Success</AlertTitle>}
+                    {alertMessage}
+                </Alert>
+            )}
+            <Box sx={{ mb: 2 }}>
                 <FormLabel htmlFor="name">Enter your name</FormLabel>
                 <br />
-                <TextField value={name} onChange={handleName} id="name" label="Full name" variant="outlined" />
+                <TextField value={name} onChange={handleName} id="name" label="Full name" variant="outlined" fullWidth required/>
             </Box>
-            <Box>
+            <Box sx={{ mb: 2 }}>
                 <FormLabel htmlFor="email">e-mail</FormLabel>
                 <br />
-                <TextField value={email} onChange={handleEmail} id="email" label="email" variant="outlined" />
+                <TextField value={email} onChange={handleEmail} id="email" label="email" variant="outlined" fullWidth required/>
             </Box>
-            <Box>
+            <Box sx={{ mb: 2 }}>
                 <FormLabel htmlFor="password">Password</FormLabel>
                 <br />
-                <TextField value={password} onChange={handlePassword} id="password" label="password" variant="outlined" type='password' />
+                <TextField value={password} onChange={handlePassword} id="password" label="password" variant="outlined" type='password' fullWidth required/>
             </Box>
-            <Box>
+            <Box sx={{ mb: 2 }}>
                 <FormLabel htmlFor="confirmPassword">Re-enter Password</FormLabel>
                 <br />
-                <TextField value={confirmPassword} onChange={handleConfirmPassword} id="confirmPassword" label="Confirm Password" variant="outlined" type='password' />
+                <TextField value={confirmPassword} onChange={handleConfirmPassword} id="confirmPassword" label="Confirm Password" variant="outlined" type='password' fullWidth required/>
             </Box>
             {/* <Box>
                 <FormLabel htmlFor="pic">Profile Picture</FormLabel>
@@ -107,7 +113,7 @@ export default function SignUp () {
             </Box> */}
 
 
-            <Button variant="contained" type='submit'>Sign Up</Button>
+            <Button variant="contained" type='submit' fullWidth>Sign Up</Button>
         </Box>
     );
 }
