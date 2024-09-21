@@ -6,8 +6,15 @@ const jwt = require('jsonwebtoken');
 const connectToDB = require('./connect');
 const User = require('./models/userModel');
 const bcrypt = require('bcrypt');
+const cors = require('cors');
 
 app.use(express.json());
+app.use(cors(
+    {
+        origin: 'http://localhost:5173',
+        credentials: true,  
+    }
+))
 
 connectToDB()
     .then(() => console.log('Connect to database'))
@@ -51,7 +58,6 @@ app.post('/api', async (req, res) => {
             message: 'User registered successfully', 
             name: name,
             email: email,
-            password: password,
             genretedToken: token 
         });
     } else {
@@ -62,7 +68,7 @@ app.post('/api', async (req, res) => {
 
 app.post('/api/login', async (req, res) =>  {
     const { email, password } = req.body;
-    if (!email ||!password) {
+    if (!email || !password) {
         return res.status(400).json({ message: 'Please provide all fields' });
     }
     
