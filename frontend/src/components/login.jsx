@@ -89,7 +89,7 @@ export default function LogIn() {
                     </Card>
                 </Box>
             ) : (
-                <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, mx: 'auto', p: 3, borderRadius: 2, boxShadow: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Box component="form" onSubmit={handleSubmit} sx={{ minWidth: 400, mx: 'auto', p: 3, borderRadius: 2, boxShadow: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 
                     {alertMessage && (
                         <Alert severity={alertSeverity} onClose={() => setAlertMessage('')} sx={{ mb: 2 }}>
@@ -100,12 +100,12 @@ export default function LogIn() {
                     )}
 
 
-                    <Box sx={{ mb: 2 }}>
+                    <Box sx={{width: '100%', mb: 2 }}>
                         <FormLabel htmlFor="email">e-mail</FormLabel>
                         <br />
                         <TextField value={email} onChange={handleEmail} id="email" label="email" variant="outlined" fullWidth required />
                     </Box>
-                    <Box sx={{ mb: 2 }}>
+                    <Box sx={{width: '100%', mb: 2 }}>
                         <FormLabel htmlFor="password">Password</FormLabel>
                         <br />
                         <TextField value={password} onChange={handlePassword} id="password" label="password" variant="outlined" type='password' fullWidth required />

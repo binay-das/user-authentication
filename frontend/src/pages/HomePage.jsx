@@ -4,8 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
-import LogIn from '../components/login'
-import SignUp from '../components/signup'
+import LogIn from '../components/LogIn'
+import SignUp from '../components/SignUp'
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -45,8 +45,8 @@ export default function HomePage() {
     };
 
     return (
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', bgcolor: 'background.default', border: '1px solid'}}>
-            <Box sx={{ width: '100%', maxWidth: 400, border: '1px solid' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', bgcolor: 'background.default'}}>
+            <Box sx={{ width: '100%', maxWidth: 400 }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
                     <Tab label="Log In" {...a11yProps(0)} />
                     <Tab label="Sign Up" {...a11yProps(1)} />

@@ -76,7 +76,7 @@ export default function SignUp () {
         }
     }
     return(
-        <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, mx: 'auto', p: 3, borderRadius: 2, boxShadow: 3 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ minWidth: 400, mx: 'auto', p: 3, borderRadius: 2, boxShadow: 3 }}>
             {alertMessage && (
                 <Alert severity={alertSeverity}>
                     {alertSeverity === 'error' && <AlertTitle>Error</AlertTitle>}
