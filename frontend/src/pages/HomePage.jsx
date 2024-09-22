@@ -37,7 +37,7 @@ function a11yProps(index) {
 }
 
 
-export default function HomePage() {
+export default function HomePage({ handleLogIn  }) {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -53,7 +53,7 @@ export default function HomePage() {
                 </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0} >
-                <LogIn />
+                <LogIn handleLogIn={handleLogIn} />
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
                 <SignUp />

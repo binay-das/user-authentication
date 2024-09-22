@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 
-export default function LogIn() {
+export default function LogIn({ handleLogIn }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -53,13 +53,18 @@ export default function LogIn() {
                 setAlertMessage(`Logged in successfully as ${data.name}`);
 
                 setData(data);
-                console.log(data);
+                // console.log(data);
 
-                navigate('/api/protected');
+                handleLogIn();   // Update the logged-in state
+                // navigate('/api/protected');
+
+                setTimeout(() => {
+                    navigate('/api/protected');
+                }, 1000); // Adjust the delay as needed
 
             } else {
                 setAlertSeverity('error');
-                setAlertMessage(`Error: ${error.message}`);
+                setAlertMessage(`Error: ${data.message || 'Unknown error'}`);
             }
 
         } catch (error) {
@@ -98,7 +103,6 @@ export default function LogIn() {
                             {alertMessage}
                         </Alert>
                     )}
-
 
                     <Box sx={{width: '100%', mb: 2 }}>
                         <FormLabel htmlFor="email">e-mail</FormLabel>

@@ -5,7 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
-export default function ProtectedPage() {
+export default function ProtectedPage({ handleLogOut: parentHandleLogOut }) {
     const [protectedData, setProtectedData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -55,7 +55,9 @@ export default function ProtectedPage() {
                 throw new Error(`Failed to log out`);
             }
 
-            navigate(-1);
+            // handleLogOut();
+            parentHandleLogOut();
+            navigate('/');   // Redirect to home after logout
             // setProtectedData(null); // Clear protected data on logout
 
         } catch (error) {
