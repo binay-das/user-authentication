@@ -40,6 +40,17 @@ app.get('/api/signup', (req, res) => {
 
 app.use('/api', authRoutes);
 
+app.post('/api/logout', (req, res) => {
+
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+    });
+
+    res.status(200).send({ message: 'Logged out successfully' });
+    
+})
 const port = process.env.PORT;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}...`);

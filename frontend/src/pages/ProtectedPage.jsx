@@ -2,11 +2,15 @@ import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProtectedPage() {
     const [protectedData, setProtectedData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchProtectedData = async () => {
@@ -39,10 +43,32 @@ export default function ProtectedPage() {
         return <Typography color="error">{error}</Typography>; // Display error message
     }
 
+    const handleLogOut = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/api/logout', {
+                method: 'POST',
+                credentials: 'include'
+
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to log out`);
+            }
+
+            navigate(-1);
+            // setProtectedData(null); // Clear protected data on logout
+
+        } catch (error) {
+            setError('Error logging out, please try again later');
+        }
+    }
+
     return (
         <Box sx={{ p: 3 }}>
             <Typography variant="h5">Protected Content</Typography>
             <Typography variant="body1">{protectedData?.protectedRoute}</Typography>
+
+            <Button variant='contained' color='primary' onClick={handleLogOut} sx={{mt: 2}}>Log Out</Button>
         </Box>
     );
 }
