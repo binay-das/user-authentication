@@ -20,8 +20,8 @@ export default function Header({ isLoggedIn, handleLogOut }) {
                     My App
                 </Typography>
                 <Button color="inherit" component={Link} to="/">Home</Button>
+                
                 {/*  <Button color="inherit" component={Link} to="/api/protected">Protected</Button> */}
-
 
                 {!isLoggedIn ? (
                     <>
@@ -34,10 +34,6 @@ export default function Header({ isLoggedIn, handleLogOut }) {
                         <Button color="inherit" onClick={handleClick}>Logout</Button>
                     </>
                 )}
-
-
-
-
             </Toolbar>
 
         </AppBar>

@@ -14,6 +14,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
+    
+    // for photo upload
+    // files: [{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'File'  // reference to the File model
+    // }],
+
+
 }, {
     timestamps: true,
 });

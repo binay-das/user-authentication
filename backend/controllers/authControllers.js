@@ -1,6 +1,30 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
+const path = require('path');
+const File = require('../models/fileModel');
+
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, '/backend/uploads/')
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, file.originalname)
+//     }
+// })
+
+// const upload = multer({ storage,
+//     fileFilter: (req, file, cb) => {
+//         const filetypes = /jpeg|jpg|png|gif/; // Allow only these file types
+//         const mimetype = filetypes.test(file.mimetype);
+//         const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+//         if (mimetype && extname) {
+//             return cb(null, true);
+//         }
+//         cb('Error: File type not supported');
+//     },
+//  }).single('file');
 
 const signUp = async (req, res) => {
     const { name, email, password } = req.body;
@@ -31,10 +55,7 @@ const signUp = async (req, res) => {
 
         res.json({ 
             message: 'User registered successfully', 
-            // id: user._id,  
             name: name,
-            // email: email,
-            // genretedToken: token 
         });
     } else {
         res.status(500).json({ message: 'Server error' });
@@ -69,10 +90,7 @@ const logIn = async (req, res) => {
 
     res.json({
         message: `Login successful for ${user.name}`,
-        // id: user._id,
         name: user.name,
-        // email: user.email,
-        // genretedToken: token
     });
 }
 
