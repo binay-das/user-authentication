@@ -50,7 +50,7 @@ const signUp = async (req, res) => {
         res.cookie('token', token, {
             httpOnly: true, // Prevents JavaScript from accessing the token
             secure: process.env.NODE_ENV === 'production', // Set to true in production
-            maxAge: 3600000  // Token valid for 1 hour
+            maxAge: 3600000  
         });
 
         res.json({ 
